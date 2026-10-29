@@ -22,6 +22,8 @@ node.js 18 or more
 
 5: open http://localhost:2525 in browser
 
+6: play
+
 * Don't close the CMD while playing, otherwise you will terminate the session
 
 * npm install command only happens one time, first time; next time you want to play just type npm start
