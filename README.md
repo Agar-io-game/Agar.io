@@ -9,9 +9,15 @@ node.js 18 or more
 **Installation:**
 
 1: Download repo > unzip
+
 2: Open CMD inside C:\Users\(You)\game\server
+
 3: Type npm install and click enter
+
 4: Type npm start and click enter
-5: open http://localhost:2525 in a browser
+
+5: open http://localhost:2525 in browser
+
 * Don't close the CMD while playing, close after you finished splitting cells
+
 * npm install command only happens one time, first time; next time you want to play just type npm start
