@@ -4,9 +4,11 @@ A re-creation of: http://senpai-agar.online/nano/ EA-Caffe server, an agar.io st
 
 100% of the code was written by Claude Opus 5.5
 
+
 ## **Requirements:**
 
 node.js 18 or more
+
 
 ## **Installation:**
 
