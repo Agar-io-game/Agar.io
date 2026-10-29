@@ -1,4 +1,5 @@
-A re-creation of: http://senpai-agar.online/nano/ EA-Caffe server, an agar.io style game
+A re-creation of: http://senpai-agar.online/nano/ EA-Caffe server, an agar.io style game.
+
 100% of the code was written by Claude Opus 5.5
 
 Requirements:
