@@ -25,3 +25,8 @@ node.js 18 or more
 * Don't close the CMD while playing, close after you finished splitting cells
 
 * npm install command only happens one time, first time; next time you want to play just type npm start
+
+## **Miscellaneous:**
+Since this sandbox has no bots, viruses, or food, I added command in chat for mass. Type in chat /mass <number> for mass
+
+As per native settings, some are removed and newly added: infinite map, mass decay
