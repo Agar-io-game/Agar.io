@@ -29,15 +29,14 @@ node.js 18 or more
 * npm install command only happens one time, first time; next time you want to play just type npm start
 
 ## **Miscellaneous:**
-Since this sandbox has no bots, viruses, or food, I added command in chat for mass. Type in chat /mass 20000 for mass
-
-As per native settings, some are removed. and newly added: infinite map, mass decay. can be enabled or disabled.
+Since this sandbox has no bots, viruses, or food, you can generate mass by typing /mass in the game chat.
+some native settings are removed like the replay bar and bug split for example. 2 new settings: infinite map, mass decay, ON/OFF
 
 ## **Gallery:**
 
-https://github.com/user-attachments/assets/640774d0-0f22-49e1-a63d-729055fc682b
-
-
-
-https://github.com/user-attachments/assets/022a2c28-24c4-470d-80da-0807391c4464
-
+<table>
+  <tr>
+    <td><video src="https://github.com/user-attachments/assets/640774d0-0f22-49e1-a63d-729055fc682b" controls></video></td>
+    <td><video src="https://github.com/user-attachments/assets/022a2c28-24c4-470d-80da-0807391c4464" controls></video></td>
+  </tr>
+</table>
