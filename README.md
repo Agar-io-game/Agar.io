@@ -22,7 +22,7 @@ node.js 18 or more
 
 5: open http://localhost:2525 in browser
 
-* Don't close the CMD while playing, close after you finished splitting cells
+* Don't close the CMD while playing, otherwise you will terminate the session
 
 * npm install command only happens one time, first time; next time you want to play just type npm start
 
