@@ -29,6 +29,9 @@ node.js 18 or more
 * npm install command only happens one time, first time; next time you want to play just type npm start
 
 ## **Miscellaneous:**
-Since this sandbox has no bots, viruses, or food, I added command in chat for mass. Type in chat /mass <number> for mass
+Since this sandbox has no bots, viruses, or food, I added command in chat for mass. Type in chat /mass 20000 for mass
 
-As per native settings, some are removed and newly added: infinite map, mass decay
+As per native settings, some are removed. and newly added: infinite map, mass decay. can be enabled or disabled.
+
+## **Gallery:**
+
