@@ -1,0 +1,17 @@
+{
+  "name": "senpai-agar-server",
+  "version": "0.1.0",
+  "description": "A from-scratch game server compatible with the Senpai Agar (LWGA-NANO) client protocol",
+  "type": "module",
+  "main": "server.mjs",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test server.test.mjs world.test.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}
