@@ -31,6 +31,7 @@ node.js 18 or more
 
 ## **Bot:**
 Proof of concept split-run bot. Trained on 4-5 games. For now it plays solo and is in it's early stages, my resolution: perfect flawless split run with duo mode and a coach mode that points out mistakes then suggests better/optimal splits at that given situation. Right now, I haven't included the bot in the files of this repo, but will do in the future.
+
 https://github.com/user-attachments/assets/6bdb3947-b1b2-420f-9487-f49fae6d79e6
 
 
