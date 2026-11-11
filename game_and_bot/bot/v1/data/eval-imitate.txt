@@ -1,0 +1,10 @@
+heading    0 deg: 261.0 u/s from 25 s to 120 s (first 25 s: 268)  splits 2.33/s  tabs 1.93/s  mass 35000
+heading   15 deg: 241.4 u/s from 25 s to 120 s (first 25 s: 246)  splits 2.48/s  tabs 1.87/s  mass 35000
+heading  -15 deg: 254.8 u/s from 25 s to 120 s (first 25 s: 268)  splits 2.17/s  tabs 1.80/s  mass 35000
+heading   45 deg: 240.3 u/s from 25 s to 120 s (first 25 s: 249)  splits 2.32/s  tabs 1.82/s  mass 35000
+heading  -45 deg: 230.5 u/s from 25 s to 120 s (first 25 s: 165)  splits 2.15/s  tabs 1.76/s  mass 35000  LOST A UNIT 1x (reset to the start position)
+heading   90 deg: 257.2 u/s from 25 s to 120 s (first 25 s: 267)  splits 2.15/s  tabs 1.78/s  mass 35000
+heading  -90 deg: 249.8 u/s from 25 s to 120 s (first 25 s: 280)  splits 2.27/s  tabs 1.82/s  mass 35000
+heading  180 deg: 266.2 u/s from 25 s to 120 s (first 25 s: 250)  splits 2.31/s  tabs 1.93/s  mass 35000
+units lost: 1 in 8 games
+mean 250.1 u/s, worst 230.5, best 266.2  (140 s)

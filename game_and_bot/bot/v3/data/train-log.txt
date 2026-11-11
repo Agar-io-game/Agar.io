@@ -1,0 +1,26 @@
+
+=== training 2026-11-10T00:59:30.119Z: 6 rounds x 300 games x 60 s, network 268-96-48-1 ===
+round 0 self-play (hand-made player, 27578 positions, 317 s): along 254 u/s (worst 202)  1s-speed 260  10s-net 256  splits 1.71/s (full 0.02, double 0.33)  tabs 1.31/s  unit gap p50 28 p90 42 max 109 idle max 81  at16 35%  min share 3%  eats 5.8/s  LOST 0  stalls 818  auto 0  merges 0
+round 0 fit: 55156 samples, error on held-out games 2218 (explains 38% of what followed), 15 s
+round 0 TEST (16 x 60 s): along 148 u/s (worst 112)  1s-speed 159  10s-net 152  splits 1.55/s (full 0.01, double 0.23)  tabs 0.75/s  unit gap p50 25 p90 48 max 842 idle max 842  at16 42%  min share 0%  eats 5.4/s  LOST 23  auto 59  merges 5
+   fitness -575.5  <- best so far: saved as data/value.json   round took 337 s
+round 1 self-play (network of round 0, 28871 positions, 113 s): along 186 u/s (worst 145)  1s-speed 199  10s-net 188  splits 1.77/s (full 0.01, double 0.32)  tabs 1.06/s  unit gap p50 28 p90 46 max 95 idle max 81  at16 29%  min share 0%  eats 6.1/s  LOST 24  stalls 1098  auto 71  merges 0
+round 1 fit: 112898 samples, error on held-out games 4396 (explains 52% of what followed), 32 s
+round 1 TEST (16 x 60 s): along 170 u/s (worst 127)  1s-speed 176  10s-net 173  splits 1.21/s (full 0.02, double 0.19)  tabs 0.47/s  unit gap p50 18 p90 61 max 1234 idle max 1234  at16 58%  min share 0%  eats 3.9/s  LOST 29  auto 39  merges 3
+   fitness -836.7  (best -575.5)   round took 148 s
+round 2 self-play (network of round 1, 27705 positions, 108 s): along 235 u/s (worst 199)  1s-speed 245  10s-net 237  splits 1.68/s (full 0.04, double 0.38)  tabs 1.07/s  unit gap p50 28 p90 53 max 123 idle max 81  at16 38%  min share 0%  eats 5.1/s  LOST 4  stalls 1839  auto 7  merges 0
+round 2 fit: 113152 samples, error on held-out games 3157 (explains 47% of what followed), 31 s
+round 2 TEST (16 x 60 s): along 142 u/s (worst 100)  1s-speed 148  10s-net 145  splits 1.34/s (full 0.02, double 0.15)  tabs 0.51/s  unit gap p50 16 p90 54 max 810 idle max 1206  at16 45%  min share 0%  eats 3.9/s  LOST 13  auto 64  merges 21
+   fitness -416.8  <- best so far: saved as data/value.json   round took 142 s
+round 3 self-play (network of round 2, 28035 positions, 107 s): along 186 u/s (worst 141)  1s-speed 197  10s-net 189  splits 1.72/s (full 0.04, double 0.20)  tabs 1.03/s  unit gap p50 28 p90 50 max 137 idle max 81  at16 33%  min share 0%  eats 4.6/s  LOST 1  stalls 1320  auto 12  merges 0
+round 3 fit: 111480 samples, error on held-out games 1865 (explains 44% of what followed), 33 s
+round 3 TEST (16 x 60 s): along 145 u/s (worst 113)  1s-speed 153  10s-net 149  splits 1.35/s (full 0.01, double 0.17)  tabs 0.61/s  unit gap p50 23 p90 97 max 958 idle max 958  at16 49%  min share 0%  eats 4.3/s  LOST 15  auto 0  merges 12
+   fitness -483.9  (best -416.8)   round took 145 s
+round 4 self-play (network of round 3, 28773 positions, 123 s): along 174 u/s (worst 123)  1s-speed 189  10s-net 177  splits 1.77/s (full 0.02, double 0.27)  tabs 1.08/s  unit gap p50 27 p90 48 max 137 idle max 81  at16 21%  min share 0%  eats 6.0/s  LOST 4  stalls 980  auto 33  merges 0
+round 4 fit: 113616 samples, error on held-out games 2284 (explains 34% of what followed), 31 s
+round 4 TEST (16 x 60 s): along 136 u/s (worst 88)  1s-speed 144  10s-net 140  splits 1.30/s (full 0.01, double 0.17)  tabs 0.61/s  unit gap p50 21 p90 63 max 1280 idle max 1332  at16 43%  min share 0%  eats 3.9/s  LOST 5  auto 40  merges 36
+   fitness -264.4  <- best so far: saved as data/value.json   round took 158 s
+round 5 self-play (network of round 4, 28769 positions, 129 s): along 178 u/s (worst 140)  1s-speed 193  10s-net 181  splits 1.77/s (full 0.01, double 0.38)  tabs 1.15/s  unit gap p50 28 p90 44 max 162 idle max 81  at16 20%  min share 0%  eats 6.5/s  LOST 0  stalls 949  auto 13  merges 0
+round 5 fit: 115084 samples, error on held-out games 2136 (explains 35% of what followed), 33 s
+round 5 TEST (16 x 60 s): along 130 u/s (worst 100)  1s-speed 139  10s-net 139  splits 1.21/s (full 0.00, double 0.20)  tabs 0.54/s  unit gap p50 23 p90 58 max 1108 idle max 1318  at16 51%  min share 0%  eats 4.0/s  LOST 11  auto 20  merges 17
+   fitness -437.8  (best -264.4)   round took 166 s

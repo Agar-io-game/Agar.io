@@ -1,0 +1,8 @@
+start weights: fitness 174.0  speed 182.3 u/s  (120.3 / 141 / 251.9 / 172.6 / 225.7)  lost 0.00/game  splits 1.38/s  looks yours 0.53  splits pass for yours 0.57
+gen   1  best 197.5 (speed 190.2, worst goal 154.6, lost 0.00/game, splits 1.44/s, looks yours 0.57, splits pass for yours 0.61)  pop mean speed 175.5  all-time 197.5  553 s
+gen   2  best 205.6 (speed 208.7, worst goal 185.4, lost 0.00/game, splits 1.54/s, looks yours 0.47, splits pass for yours 0.57)  pop mean speed 183.8  all-time 205.6  530 s
+gen   3  best 220.0 (speed 227.1, worst goal 211.3, lost 0.00/game, splits 1.57/s, looks yours 0.40, splits pass for yours 0.58)  pop mean speed 199.8  all-time 220.0  493 s
+gen   4  best 208.3 (speed 229.0, worst goal 190.2, lost 0.00/game, splits 1.68/s, looks yours 0.39, splits pass for yours 0.52)  pop mean speed 199.9  all-time 220.0  487 s
+gen   5  best 225.1 (speed 230.0, worst goal 186.2, lost 0.00/game, splits 1.56/s, looks yours 0.49, splits pass for yours 0.59)  pop mean speed 201.7  all-time 225.1  483 s
+gen   6  best 226.0 (speed 219.2, worst goal 200.1, lost 0.00/game, splits 1.43/s, looks yours 0.44, splits pass for yours 0.68)  pop mean speed 197.0  all-time 226.0  483 s
+gen   7  best 225.0 (speed 218.8, worst goal 194.4, lost 0.00/game, splits 1.46/s, looks yours 0.48, splits pass for yours 0.66)  pop mean speed 194.4  all-time 226.0  486 s

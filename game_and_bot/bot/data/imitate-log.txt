@@ -1,0 +1,24 @@
+node bot/imitate.mjs 8   (cursor as a mixture of 5 choices per key)
+20261024-145556.jsonl.gz: 46423 samples, keys none 41743, split1 2434, split4 280, tab 1966
+20261024-232354.jsonl.gz: 36556 samples, keys none 33093, split1 1845, split4 158, tab 1460
+20261025-193943.jsonl.gz: 38206 samples, keys none 34504, split1 1947, split4 190, tab 1565
+20261029-001559.jsonl.gz: 43812 samples, keys none 39560, split1 2126, split4 224, tab 1902
+validation: train on 20261024-145556.jsonl.gz, 20261024-232354.jsonl.gz, 20261025-193943.jsonl.gz, test on 20261029-001559.jsonl.gz
+epoch 1: train loss 0.660  |  held-out: key precision 16% recall 8%, cursor R^2 (mixture mean) 0.51, cursor log-likelihood 0.19
+epoch 2: train loss 0.432  |  held-out: key precision 17% recall 14%, cursor R^2 (mixture mean) 0.54, cursor log-likelihood 0.28
+epoch 3: train loss 0.352  |  held-out: key precision 17% recall 21%, cursor R^2 (mixture mean) 0.56, cursor log-likelihood 0.35
+epoch 4: train loss 0.293  |  held-out: key precision 17% recall 23%, cursor R^2 (mixture mean) 0.56, cursor log-likelihood 0.36
+epoch 5: train loss 0.250  |  held-out: key precision 18% recall 17%, cursor R^2 (mixture mean) 0.57, cursor log-likelihood 0.38
+epoch 6: train loss 0.208  |  held-out: key precision 17% recall 20%, cursor R^2 (mixture mean) 0.58, cursor log-likelihood 0.42
+epoch 7: train loss 0.174  |  held-out: key precision 18% recall 16%, cursor R^2 (mixture mean) 0.58, cursor log-likelihood 0.37
+epoch 8: train loss 0.145  |  held-out: key precision 19% recall 24%, cursor R^2 (mixture mean) 0.59, cursor log-likelihood 0.44
+final: all four recordings
+epoch 1: train loss 0.587
+epoch 2: train loss 0.362
+epoch 3: train loss 0.282
+epoch 4: train loss 0.225
+epoch 5: train loss 0.186
+epoch 6: train loss 0.153
+epoch 7: train loss 0.127
+epoch 8: train loss 0.104
+saved bot/data/policy.json

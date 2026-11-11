@@ -1,0 +1,72 @@
+{
+ "fitness": 174.2237408634096,
+ "speed": 178.11649827330746,
+ "params": {
+  "keyGap": 4,
+  "decideEvery": 3,
+  "horizon": 59,
+  "rollout": "noop",
+  "basePeriod": 10,
+  "aimHold": 10,
+  "wKey": 5.546686038940206,
+  "far": 20000,
+  "near": 2191.7738759872527,
+  "angles": [
+   0,
+   30,
+   -30,
+   90,
+   -90,
+   180
+  ],
+  "mid": 2500,
+  "midAngles": [
+   0,
+   15,
+   -15,
+   30,
+   -30
+  ],
+  "wHuman": 0.8153656435565657,
+  "wSlot": 34.59200187078858,
+  "wSpeed": 47.707938804443266,
+  "wLat": 0.14262811246006707,
+  "wSep": 0.07817750444672415,
+  "sepFree": 2683.805732321259,
+  "wEdible": 36.282798857939184,
+  "wBoost": 1.8125010037862284,
+  "wBal": 678.8595542710657,
+  "minShare": 0.2222860197165435,
+  "wStarve": 174.88226480169595,
+  "rolloutBase": 0.10103370922457852
+ },
+ "games": [
+  {
+   "speed": 185.2,
+   "splits": 0.53,
+   "tabs": 0.67,
+   "lost": false
+  },
+  {
+   "speed": 165.1,
+   "splits": 0.27,
+   "tabs": 0.27,
+   "lost": false
+  },
+  {
+   "speed": 184,
+   "splits": 0.51,
+   "tabs": 0.55,
+   "lost": false
+  }
+ ],
+ "trainedAt": "2026-11-08T10:27:31.386Z",
+ "seconds": 75,
+ "warmup": 25,
+ "goals": [
+  0,
+  0.52,
+  -0.52
+ ],
+ "note": "speed = u/s along the course from 25 s to 75 s"
+}

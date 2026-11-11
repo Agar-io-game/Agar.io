@@ -1,0 +1,5 @@
+start weights: fitness 172.6  speed 175.1 u/s  (187 / 166.7 / 171.6)
+gen   1  best 172.8 (speed 175.5, worst goal 166.5)  pop mean speed 159.3  all-time 172.8  214 s
+gen   2  best 178.8 (speed 181.8, worst goal 171.7)  pop mean speed 165.0  all-time 178.8  213 s
+gen   3  best 186.7 (speed 188.3, worst goal 182.9)  pop mean speed 170.4  all-time 186.7  225 s
+gen   4  best 181.5 (speed 187.7, worst goal 166.9)  pop mean speed 171.0  all-time 186.7  234 s

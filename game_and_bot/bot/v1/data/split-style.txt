@@ -1,0 +1,24 @@
+How the bot's splits compare with yours (all four recordings after 48.2 s; bot: 72 games of 120 s
+from the 35,000-mass start: 8 headings, 9 games each, jittered by up to 5 degrees; a lost unit resets the
+game to the start position). Bot you watched = data/params.json before the retune (single splits paced
+like yours); bot now = train.mjs run 4 (look network, faster rhythm, split reward). Positions are along
+the course from the mass centre, scaled to 35,000 mass.
+
+                                                                           you bot you watched         bot now
+games (time after the 48.2 s start)                                4 (110 min)    72 (144 min)    72 (144 min)
+speed, mean / median (u/s; bot 25-120 s, you 60 s windows)          156 / 161       199 / 206       242 / 247
+games under 150 u/s                                                          -               3               2
+units lost (game reset to the start position)                                -               9               4
+single splits per s                                                       1.22            1.04            1.61
+full splits per s                                                         0.10            0.22            0.40
+  of them forward (cursor within 60 deg of the course)                   0.056           0.175           0.290
+cursor at a split: own cell                                                 8%             25%             26%
+cursor at a split: ahead, empty                                            31%             22%             21%
+cursor at a split: side, empty                                             19%              3%              6%
+cursor at a split: their cell my half can eat                              16%             21%             21%
+cursor at a split: their biggest (feeds it)                                11%              9%              9%
+cells under 400 mass at a time                                             2.5             3.0             4.8
+front unit, 150-400 cells: mean position along the course                 -896           -1344            -849
+front unit, 400-1000 cells: mean position along the course                -147            -528             -74
+front unit, 1000-2500 cells: mean position along the course                573             581             628
+a stay at 16 cells: 90th percentile / longest (s)                    0.4 / 6.2      0.3 / 48.3      0.3 / 41.5

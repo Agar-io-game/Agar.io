@@ -1,0 +1,1 @@
+start weights: fitness 147.7  speed 150.8 u/s  (140.4 / 162.4 / 149.7)

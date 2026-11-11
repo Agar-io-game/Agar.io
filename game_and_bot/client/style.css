@@ -1,0 +1,112 @@
+/* Colours come from the settings (the original's colour definitions) via CSS variables. */
+:root {
+  --font: "Titillium Web", "Segoe UI", "Noto Sans", system-ui, sans-serif;
+  --text: #e8e8ea;
+  --dim: #9a9aa6;
+}
+#page-root {
+  --game-bg: rgb(68, 85, 136); --game-fg: #fff; --lb-back: rgba(0, 0, 51, .4); --lb-header: #0ff;
+  --map-back: rgba(0, 0, 0, .53); --chat-back: rgba(0, 0, 0, .53); --chat-name: #0088ff; --chat-msg: #fff; --chat-time: #aaa;
+  --panel-back: rgba(0, 34, 136, .53); --panel-fg: #0ff; --panel-header: #000044; --main-buttons: #ff0088;
+  --menu-buttons: #0088ff; --button-active: #0000ff; --overlay-back: rgba(0, 0, 0, .27); --ui-symbols: #fff;
+  --panel-image: none; --panel-image-alpha: .6;
+  position: fixed; inset: 0; background: var(--game-bg); color: var(--game-fg); font-family: var(--font); overflow: hidden;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: #000; }
+[hidden] { display: none !important; }
+canvas#game { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: crosshair; }
+
+#hud-score { position: absolute; top: 10px; left: 12px; font-size: 28px; font-weight: 700; letter-spacing: .5px; pointer-events: none; text-shadow: 0 1px 2px #000; opacity: .85; }
+#hud-score span { margin-right: 22px; }
+#spec-target { position: absolute; top: 48px; left: 12px; font-size: 16px; pointer-events: none; text-shadow: 0 1px 2px #000; }
+
+#leaderboard { position: absolute; top: 10px; right: 10px; width: 230px; padding: 8px 12px 10px; background: var(--lb-back); border-radius: 6px; pointer-events: none; }
+#leaderboard .title { text-align: center; font-weight: 700; font-size: 20px; color: var(--lb-header); margin-bottom: 4px; }
+#leaderboard ol { margin: 0; padding: 0; list-style: none; font-size: 15px; }
+#leaderboard li { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.45; }
+#leaderboard li.me { color: #ffd84d; }
+#leaderboard li .m { float: right; opacity: .7; font-size: 13px; margin-left: 6px; }
+
+#stats { position: absolute; left: 12px; bottom: 10px; font-size: 14px; text-transform: uppercase; line-height: 1.6; pointer-events: none; text-shadow: 0 1px 2px #000; }
+#stats.no-client .client { display: none; }
+#stats b { font-weight: 400; text-transform: none; }
+#st-server { white-space: pre; opacity: .7; font-size: 12px; margin-top: 6px; text-transform: none; }
+
+#minimap { position: absolute; right: 10px; bottom: 10px; width: 200px; height: 200px; background: var(--map-back); border-radius: 4px; pointer-events: none; }
+
+#chat { position: absolute; left: 12px; bottom: 150px; width: 400px; max-width: calc(100vw - 240px); }
+#chat-log { max-height: 200px; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; font-size: 14px; pointer-events: none; }
+#chat-log .msg { margin: 1px 0; padding: 1px 6px; background: var(--chat-back); color: var(--chat-msg); word-wrap: break-word; border-radius: 3px; }
+#chat-log .time { color: var(--chat-time); font-size: 12px; }
+#chat-log b { color: var(--chat-name); font-weight: 600; }
+#chat-log .msg.sys b { color: #ff4f8b; }
+#chat-input { width: 100%; margin-top: 4px; padding: 6px 8px; font: inherit; font-size: 14px; color: #fff; background: rgba(0,0,0,.6); border: 1px solid #333; border-radius: 4px; outline: none; opacity: 0; transition: opacity .15s; }
+#chat-input.open { opacity: 1; }
+#player-log { position: absolute; left: 200px; bottom: 6px; font-size: 12px; pointer-events: none; }
+#player-log div { background: var(--chat-back); padding: 1px 6px; margin-top: 2px; border-radius: 3px; }
+
+#toast { position: absolute; top: 22%; left: 50%; transform: translateX(-50%); padding: 8px 16px; background: rgba(0,0,0,.6); border-radius: 6px; font-size: 16px; opacity: 0; transition: opacity .2s; pointer-events: none; }
+#toast.show { opacity: 1; }
+
+/* main menu */
+#menu { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: var(--overlay-back); }
+#menu.hidden, #settings.hidden { display: none; }
+.panel, .spanel { position: relative; color: var(--text); background: var(--panel-back); border: 1px solid rgba(255,255,255,.12); border-radius: 10px; box-shadow: 0 20px 60px rgba(0,0,0,.55); backdrop-filter: blur(6px); }
+.panel::before, .spanel::before { content: ""; position: absolute; inset: 0; border-radius: inherit; background: var(--panel-image) center / cover no-repeat; opacity: var(--panel-image-alpha); pointer-events: none; z-index: -1; }
+.panel { width: min(520px, calc(100vw - 32px)); padding: 24px 26px 18px; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.panel label { display: block; font-size: 11px; color: var(--panel-fg); text-transform: uppercase; letter-spacing: 1px; margin: 6px 0; }
+.panel input, .spanel input[type=text] { display: block; width: 100%; margin-top: 4px; padding: 8px 10px; font: inherit; font-size: 15px; color: #fff; background: rgba(0,0,0,.45); border: 1px solid rgba(255,255,255,.18); border-radius: 6px; outline: none; }
+.panel input:focus, .spanel input[type=text]:focus { border-color: var(--panel-fg); }
+.buttons { display: flex; gap: 10px; margin: 14px 0 12px; }
+.buttons button { flex: 1; padding: 11px; font: inherit; font-size: 16px; font-weight: 700; letter-spacing: 1px; color: #fff; background: var(--main-buttons); border: 0; border-radius: 6px; cursor: pointer; }
+.buttons button.secondary { background: var(--menu-buttons); }
+.buttons #btn-settings { flex: 0 0 52px; font-size: 20px; }
+.buttons button:hover { filter: brightness(1.15); }
+kbd { display: inline-block; min-width: 18px; padding: 1px 5px; font: inherit; font-size: 11px; color: #ddd; background: rgba(0,0,0,.4); border: 1px solid rgba(255,255,255,.2); border-bottom-width: 2px; border-radius: 4px; text-align: center; }
+
+/* settings panel */
+#settings { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,.35); z-index: 10; }
+.spanel { width: min(720px, calc(100vw - 24px)); height: min(640px, calc(100vh - 24px)); display: flex; flex-direction: column; overflow: hidden; }
+.spanel header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: var(--panel-header); color: var(--panel-fg); font-weight: 700; letter-spacing: 1px; }
+.spanel header .close { background: none; border: 0; color: var(--ui-symbols); font-size: 24px; line-height: 1; cursor: pointer; }
+.stabs { display: flex; flex-wrap: wrap; gap: 4px; padding: 8px 12px 0; }
+.stabs button { padding: 7px 12px; font: inherit; font-size: 13px; color: var(--text); background: rgba(0,0,0,.3); border: 0; border-radius: 6px 6px 0 0; cursor: pointer; }
+.stabs button.active { background: var(--button-active); color: #fff; }
+.sbody { flex: 1; overflow-y: auto; padding: 8px 16px 12px; background: rgba(0,0,0,.25); }
+.sbody h3 { margin: 10px 0 6px; font-size: 13px; color: var(--panel-fg); text-transform: uppercase; letter-spacing: 1px; }
+.srow { display: grid; grid-template-columns: 1fr 96px 96px; align-items: center; gap: 8px; padding: 3px 0; border-bottom: 1px solid rgba(255,255,255,.05); font-size: 14px; }
+.srow.slider { grid-template-columns: 1fr 1.2fr 70px; }
+.srow.color { grid-template-columns: 1fr 26px 52px 120px; }
+.srow.text { grid-template-columns: 160px 1fr; }
+.srow.shead { border: 0; font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: 1px; }
+.keyhead { text-align: center; }
+.slabel { display: flex; align-items: center; gap: 8px; }
+.slabel input[type=checkbox] { width: 16px; height: 16px; accent-color: var(--panel-fg); }
+.keybox { height: 26px; font: inherit; font-size: 12px; color: #fff; background: rgba(0,0,0,.45); border: 1px solid rgba(255,255,255,.2); border-radius: 4px; cursor: pointer; }
+.keybox.listening { border-color: var(--panel-fg); color: var(--panel-fg); }
+.sval { text-align: right; font-variant-numeric: tabular-nums; color: var(--dim); }
+.srow input[type=range] { width: 100%; accent-color: var(--panel-fg); }
+.srow input[type=color] { width: 52px; height: 26px; padding: 0; border: 0; background: none; cursor: pointer; }
+.swatch { width: 22px; height: 22px; border-radius: 4px; border: 1px solid rgba(255,255,255,.3); background-image: linear-gradient(45deg, #888 25%, transparent 25%, transparent 75%, #888 75%), linear-gradient(45deg, #888 25%, transparent 25%, transparent 75%, #888 75%); background-size: 8px 8px; background-position: 0 0, 4px 4px; }
+.spanel footer { padding: 10px 16px; display: flex; justify-content: flex-end; gap: 8px; background: rgba(0,0,0,.3); }
+.spanel footer button:not(.danger), .importpane button { padding: 8px 14px; font: inherit; font-size: 13px; color: #fff; background: #0a6ad6; border: 0; border-radius: 6px; cursor: pointer; }
+.spanel footer .danger { padding: 8px 14px; font: inherit; font-size: 13px; color: #fff; background: #a3233d; border: 0; border-radius: 6px; cursor: pointer; }
+
+@media (max-width: 720px) {
+  #hud-score { font-size: 18px; }
+  #leaderboard { width: 150px; font-size: 12px; }
+  #minimap { width: 120px; height: 120px; }
+  #chat { display: none; }
+  .row2 { grid-template-columns: 1fr; }
+  .srow { grid-template-columns: 1fr 72px 72px; }
+}
+
+.importpane { padding: 8px 14px; border-top: 1px solid rgba(255,255,255,.15); font-size: 13px; }
+.importpane.hidden { display: none; }
+.importpane code { display: block; font-size: 11px; background: rgba(0,0,0,.35); padding: 6px; margin: 4px 0 6px; word-break: break-all; user-select: all; }
+.importbox { width: 100%; box-sizing: border-box; font: 11px monospace; background: rgba(0,0,0,.4); color: #fff; border: 1px solid rgba(255,255,255,.3); }
+.importstatus { margin-left: 10px; }
+.importsteps { margin: 4px 0; padding-left: 20px; }
+.importpane p { margin: 4px 0; }

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Senpai Agar Recreation</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div id="page-root">
+  <canvas id="game"></canvas>
+
+  <div id="hud-score"><span id="score">Score: 0.0k</span><span id="max">Max: 0.0k</span><span id="cells">/16</span></div>
+  <div id="spec-target"></div>
+
+  <div id="leaderboard"><div class="title" id="lb-title">Leaderboard</div><ol id="lb-list"></ol></div>
+
+  <div id="stats">
+    <div class="client">FPS : <b id="st-fps">0</b></div>
+    <div class="client">NODES : <b id="st-nodes">0</b></div>
+    <div class="client">LATENCY : <b id="st-lat">-</b> ms</div>
+    <div id="st-server"></div>
+  </div>
+
+  <canvas id="minimap" width="200" height="200"></canvas>
+
+  <div id="chat">
+    <div id="chat-log"></div>
+    <input id="chat-input" maxlength="200" placeholder="Enter to chat" autocomplete="off">
+  </div>
+  <div id="player-log"></div>
+
+  <div id="toast"></div>
+
+  <div id="menu">
+    <div class="panel">
+      <div class="row2">
+        <label>Team tag <input id="in-team" maxlength="15" placeholder="tag" autocomplete="off"></label>
+        <label>Name <input id="in-name" maxlength="15" placeholder="nickname" autocomplete="off"></label>
+      </div>
+      <div class="row2">
+        <label>Skin 1 URL <input id="in-skin" placeholder="optional" autocomplete="off"></label>
+        <label>Skin 2 URL <input id="in-skin2" placeholder="optional (second unit)" autocomplete="off"></label>
+      </div>
+      <div class="buttons">
+        <button id="btn-play">Play</button>
+        <button id="btn-spec" class="secondary">Spectate</button>
+        <button id="btn-settings" class="secondary" title="Settings">⚙</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="settings" class="hidden"></div>
+</div>
+<script src="/lib/pixi-legacy.min.js"></script>
+<script type="module" src="/game.mjs"></script>
+</body>
+</html>
