@@ -30,7 +30,7 @@ node.js 18 or more
 
 
 ## **Bot:**
-Proof of concept split-run bot. Trained on 4-5 games. For now it plays solo and is in it's early stages, my resolution: perfect flawless split run with duo mode and a coach mode that points out mistakes then suggests better/optimal splits at that given situation. game_and_bot folder contains both. in the in-game chat type /bot v1, /bot v2, or /bot dev, for different versions of the bot. use /bot stop, to stop the bot.
+Proof of concept split-run bot. Trained on 4-5 games. For now it plays solo and is in it's early stages, my resolution: perfect flawless split run with duo mode and a coach mode that points out mistakes then suggests better/optimal splits at that given situation. game_and_bot folder contains both. in the in-game chat type /bot v1, /bot v2, or /bot dev, for different versions of the bot. use /bot stop, to stop the bot. The bot starts from a specific situation that I gave it during training. That is because training it from zero caused it to get entangled and wasted so much time.
 
 
 https://github.com/user-attachments/assets/bc2b7967-7aac-4c80-a99d-1bec14f511af
