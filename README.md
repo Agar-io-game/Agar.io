@@ -1,8 +1,8 @@
 ## **Info:**
 
-A re-creation of: http://senpai-agar.online/nano/ EA-Caffe server, an agar.io style game.
+a re-creation of: http://senpai-agar.online/nano/ EA-Caffe server, an agar.io style game.
 
-100% of the code was written by Claude Opus 5.5
+100% of the code was written by claude Opus 5.5
 
 
 ## **Requirements:**
@@ -12,37 +12,36 @@ node.js 18 or more
 
 ## **Installation:**
 
-1: Download repo > unzip
+1: download repo > unzip
 
-2: Open CMD inside C:\Users\ (You) \game\server
+2: open CLI inside C:\Users\ (You) \game\server
 
-3: Type npm install and click enter
+3: type npm install and click enter
 
-4: Type npm start and click enter
+4: type npm start and click enter
 
 5: open http://localhost:2525 in browser
 
 6: play
 
-* Don't close the CMD while playing, otherwise you will terminate the session
+* don't close the CLI while playing, otherwise you will terminate the session
 
-* npm install command only happens one time, first time; next time you want to play just type npm start
+* npm install command only happens one time, the first time. next time you want to play just type npm start
 
 
-## **what's in:**
-1: game: the game
+## **What's in:**
+1: game: the game, and the bot
 
 2: readme.md: this
 
-3: game_example.gz: split run game, performed by me solo
+3: game_example.gz: this file is one of the games the bot was trained on, a game played by me, solo, using unit 2 to simulate a team-mate. played on the same sandbox rules the bot was trained on, 35K~ mass, no walls, no mass decay.
 
-4: viewer.html: the viewer that translates the example game into visual
-
+4: viewer.html: this file translates the example game from text to visual. it opens a page in browser, click & drag the .gz file into the page to load it. you can see how I performed and what the bot learned from.
 
 
 ## **Bot:**
-Proof of concept split-run bot. Trained on 4-5 games. For now it plays solo and is in it's early stages, my resolution: perfect flawless split run with duo mode and a coach mode that points out mistakes then suggests better/optimal splits at any given situation. in the in-game chat type /bot v1, /bot v2, or /bot dev, for different versions of the bot. use /bot stop, to stop the bot. The bot starts from a specific situation that I gave it during training. That is because training it from zero caused it to get entangled and wasted so much time.
-The game_example.gz file, is a game played by human, me, solo, using unit 2 to simulate a team-mate. It uses the same sandbox parameters the bot was trained on, 35K~ mass, no walls, no decay. The viewer.html file opens a page in browser that shows the game visually, so you can see how I performed and how the bot was taught.
+proof of concept split-run bot. trained on 4-5 games. for now it plays solo only and is in it's early stages. my resolution: perfect flawless split run with duo mode and a coach mode that points out mistakes then suggests better/optimal splits at any given situation. in game chat type /bot v1, /bot v2, or /bot dev, for different versions of the bot. use /bot stop to remove the bot. the bot starts from a specific situation that I gave it during training. that is because training it from zero caused it to get entangled and waste so much time.
+
 
 
 https://github.com/user-attachments/assets/bc2b7967-7aac-4c80-a99d-1bec14f511af
@@ -50,7 +49,7 @@ https://github.com/user-attachments/assets/bc2b7967-7aac-4c80-a99d-1bec14f511af
 
 
 ## **Miscellaneous:**
-Since this sandbox has no bots, viruses, or food, you can generate mass by typing /mass 25000 for example in the game chat.
+since this sandbox has no bots, viruses, or food, you can generate mass by typing /mass 25000 for example in the game chat.
 some native settings are removed like the replay bar and bug split for example. 2 new settings: infinite map, mass decay, ON/OFF
 
 ## **Gallery:**
