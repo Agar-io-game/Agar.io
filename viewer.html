@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Split-run replay viewer</title>
+<style>
+  :root { --bg: #1d2333; --panel: #262d40; --text: #e6e9f2; --muted: #9aa3b8; --u0: #4da3ff; --u1: #ff9a3c; --accent: #6fdc8c; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.4 system-ui, sans-serif; height: 100vh; display: flex; flex-direction: column; }
+  header { display: flex; gap: 12px; align-items: center; padding: 8px 12px; background: var(--panel); flex-wrap: wrap; }
+  header b { font-size: 15px; }
+  button, select { background: #34405a; color: var(--text); border: 1px solid #46536f; border-radius: 6px; padding: 5px 10px; font: inherit; cursor: pointer; }
+  #wrap { flex: 1; position: relative; min-height: 0; }
+  canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  #drop { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 18px; text-align: center; padding: 24px; pointer-events: none; }
+  #stats { position: absolute; top: 10px; left: 10px; background: rgba(20, 24, 36, .85); padding: 8px 10px; border-radius: 8px; font: 12px/1.5 ui-monospace, monospace; white-space: pre; }
+  footer { padding: 8px 12px; background: var(--panel); display: flex; gap: 10px; align-items: center; }
+  #bar { flex: 1; position: relative; height: 22px; }
+  #bar input { width: 100%; margin: 0; position: absolute; top: 3px; }
+  #accept { position: absolute; top: 0; height: 4px; background: var(--accent); border-radius: 2px; }
+  #info { color: var(--muted); font-size: 12px; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<header>
+  <b>Replay viewer</b>
+  <button id="open">Open recording…</button>
+  <input id="file" type="file" accept=".gz,.jsonl" hidden>
+  <span id="info">Drop a .jsonl.gz here (your /rec files or generated data)</span>
+</header>
+<div id="wrap">
+  <canvas id="cv"></canvas>
+  <div id="drop">Drop a recording (.jsonl.gz) anywhere on this page</div>
+  <div id="stats" hidden></div>
+</div>
+<footer>
+  <button id="play">▶</button>
+  <select id="speed"><option>0.25</option><option>0.5</option><option selected>1</option><option>2</option><option>4</option></select>
+  <div id="bar"><div id="accept" hidden></div><input id="seek" type="range" min="0" max="0" value="0"></div>
+  <span id="time">0.0 s</span>
+</footer>
+<script>
+// Format: recordings/FORMAT.md. Units: playerId & 1. Cells: [id, pid, x, y, mass, boost, angle].
+const $ = (id) => document.getElementById(id);
+const cv = $('cv'), ctx = cv.getContext('2d');
+let rec = null, idx = 0, playing = false, last = 0, acc = 0;
+
+async function readFile(file) {
+  let text;
+  if (file.name.endsWith('.gz')) text = await new Response(file.stream().pipeThrough(new DecompressionStream('gzip'))).text();
+  else text = await file.text();
+  const lines = text.split('\n').filter(Boolean).map((l) => JSON.parse(l));
+  const header = lines[0], frames = [], events = new Map();
+  for (const o of lines.slice(1)) {
+    if (o.ev) { if (o.ev !== 'aim') (events.get(o.tick) ?? events.set(o.tick, []).get(o.tick)).push(o); }
+    else frames.push(o);
+  }
+  frames.sort((a, b) => a.tick - b.tick);
+  for (const f of frames) { let m = 0, x = 0, y = 0; for (const c of f.cells) { m += c[4]; x += c[2] * c[4]; y += c[3] * c[4]; } f.m = m; f.cx = m ? x / m : 0; f.cy = m ? y / m : 0; }
+  rec = { header, frames, events, name: file.name };
+  idx = 0; $('seek').max = frames.length - 1; $('seek').value = 0;
+  $('drop').hidden = true; $('stats').hidden = false;
+  const g = header.generated;
+  $('info').textContent = `${file.name} · ${(frames.length * 0.04).toFixed(0)} s` + (g ? ` · generated from ${g.from.file} @${g.from.tick} · ${g.quality ? `${g.quality.speed} u/s, ${g.quality.splitsPerSec} splits/s, ${g.quality.eatsPerSec} eats/s` : ''}` : '');
+  const a = $('accept');
+  if (g?.accept) {
+    const t0 = frames[0].tick, n = frames.length;
+    a.hidden = false; a.style.left = `${100 * (g.accept[0] - t0) / n}%`; a.style.width = `${100 * (g.accept[1] - g.accept[0]) / n}%`; a.title = 'stretch that passed the split-run filter';
+  } else a.hidden = true;
+  draw();
+}
+
+function fit() { const r = cv.getBoundingClientRect(), d = devicePixelRatio || 1; cv.width = r.width * d; cv.height = r.height * d; }
+
+function draw() {
+  fit();
+  const W = cv.width, H = cv.height;
+  ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--bg'); ctx.fillRect(0, 0, W, H);
+  if (!rec) return;
+  const f = rec.frames[idx];
+  // zoom: fit all cells, smoothed by looking at a few frames around
+  let ext = 2500;
+  for (const c of f.cells) ext = Math.max(ext, Math.abs(c[2] - f.cx) + Math.sqrt(100 * c[4]), Math.abs(c[3] - f.cy) + Math.sqrt(100 * c[4]));
+  const s = Math.min(W, H) / (2 * ext * 1.1);
+  const X = (x) => W / 2 + (x - f.cx) * s, Y = (y) => H / 2 + (y - f.cy) * s;
+  // grid
+  ctx.strokeStyle = 'rgba(255,255,255,.05)'; ctx.lineWidth = 1;
+  const g = 1000, gx0 = Math.floor((f.cx - W / 2 / s) / g) * g, gy0 = Math.floor((f.cy - H / 2 / s) / g) * g;
+  for (let x = gx0; x < f.cx + W / 2 / s; x += g) { ctx.beginPath(); ctx.moveTo(X(x), 0); ctx.lineTo(X(x), H); ctx.stroke(); }
+  for (let y = gy0; y < f.cy + H / 2 / s; y += g) { ctx.beginPath(); ctx.moveTo(0, Y(y)); ctx.lineTo(W, Y(y)); ctx.stroke(); }
+  // trail of the mass centre (last 5 s)
+  ctx.strokeStyle = 'rgba(111,220,140,.6)'; ctx.lineWidth = 2 * (devicePixelRatio || 1); ctx.beginPath();
+  for (let i = Math.max(0, idx - 125); i <= idx; i++) { const q = rec.frames[i]; i === Math.max(0, idx - 125) ? ctx.moveTo(X(q.cx), Y(q.cy)) : ctx.lineTo(X(q.cx), Y(q.cy)); }
+  ctx.stroke();
+  // ejected mass
+  ctx.fillStyle = '#c8cbd6';
+  for (const e of f.ej ?? []) { ctx.beginPath(); ctx.arc(X(e[2]), Y(e[3]), Math.max(1.5, Math.sqrt(100 * e[4]) * s), 0, 7); ctx.fill(); }
+  // cells, biggest first
+  const css = getComputedStyle(document.body), col = [css.getPropertyValue('--u0'), css.getPropertyValue('--u1')];
+  for (const c of f.cells.slice().sort((a, b) => b[4] - a[4])) {
+    const r = Math.sqrt(100 * c[4]) * s, u = c[1] & 1;
+    ctx.globalAlpha = .55; ctx.fillStyle = col[u]; ctx.beginPath(); ctx.arc(X(c[2]), Y(c[3]), r, 0, 7); ctx.fill();
+    ctx.globalAlpha = 1; ctx.strokeStyle = c[5] > 0 ? '#fff' : col[u]; ctx.lineWidth = (c[5] > 0 ? 2 : 1) * (devicePixelRatio || 1); ctx.stroke();
+    if (c[5] > 0) { // flying: show where it is heading
+      ctx.beginPath(); ctx.moveTo(X(c[2]), Y(c[3])); ctx.lineTo(X(c[2] + Math.cos(c[6]) * c[5] * 3), Y(c[3] + Math.sin(c[6]) * c[5] * 3)); ctx.stroke();
+    }
+    if (r > 14) { ctx.fillStyle = '#fff'; ctx.font = `${Math.min(14, r / 2.5) * (devicePixelRatio || 1)}px system-ui`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(Math.round(c[4]), X(c[2]), Y(c[3])); }
+  }
+  // stats
+  const back = rec.frames[Math.max(0, idx - 125)], dt = (f.tick - back.tick) * 0.04;
+  const speed = dt ? Math.hypot(f.cx - back.cx, f.cy - back.cy) / dt : 0;
+  let splits = 0, tabs = 0;
+  for (let t = back.tick; t < f.tick; t++) for (const e of rec.events.get(t) ?? []) { if (e.ev === 'split') splits++; if (e.ev === 'tab') tabs++; }
+  const units = [0, 1].map((k) => f.cells.filter((c) => (c[1] & 1) === k));
+  const ga = rec.header.generated?.accept, inAcc = ga && f.tick >= ga[0] && f.tick < ga[1];
+  $('stats').textContent =
+    `tick ${f.tick}${ga ? (inAcc ? '   ✔ passed the filter' : '   (lead-in)') : ''}\n` +
+    `speed (last 5 s)  ${speed.toFixed(0)} u/s\n` +
+    `splits / tabs     ${dt ? (splits / dt).toFixed(1) : 0} / ${dt ? (tabs / dt).toFixed(1) : 0} per s\n` +
+    `blue  ${String(units[0].length).padStart(2)} cells  ${Math.round(units[0].reduce((a, c) => a + c[4], 0))}\n` +
+    `orange ${String(units[1].length).padStart(2)} cells  ${Math.round(units[1].reduce((a, c) => a + c[4], 0))}`;
+  $('time').textContent = `${((f.tick - rec.frames[0].tick) * 0.04).toFixed(1)} s`;
+  $('seek').value = idx;
+}
+
+function loop(ts) {
+  if (playing && rec) {
+    acc += (ts - last) * Number($('speed').value);
+    while (acc >= 40 && idx < rec.frames.length - 1) { idx++; acc -= 40; }
+    if (idx >= rec.frames.length - 1) { playing = false; $('play').textContent = '▶'; }
+    draw();
+  }
+  last = ts; requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+$('open').onclick = () => $('file').click();
+$('file').onchange = (e) => e.target.files[0] && readFile(e.target.files[0]);
+$('play').onclick = () => { playing = !playing; $('play').textContent = playing ? '❚❚' : '▶'; if (rec && idx >= rec.frames.length - 1) idx = 0; };
+$('seek').oninput = (e) => { idx = Number(e.target.value); draw(); };
+addEventListener('resize', draw);
+addEventListener('dragover', (e) => e.preventDefault());
+addEventListener('drop', (e) => { e.preventDefault(); const f = e.dataTransfer.files[0]; if (f) readFile(f); });
+addEventListener('keydown', (e) => {
+  if (!rec) return;
+  if (e.key === ' ') { e.preventDefault(); $('play').click(); }
+  if (e.key === 'ArrowRight') { idx = Math.min(rec.frames.length - 1, idx + (e.shiftKey ? 25 : 1)); draw(); }
+  if (e.key === 'ArrowLeft') { idx = Math.max(0, idx - (e.shiftKey ? 25 : 1)); draw(); }
+});
+draw();
+</script>
+</body>
+</html>
