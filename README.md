@@ -14,7 +14,7 @@ node.js 18 or more
 
 1: Download repo > unzip
 
-2: Open CMD inside C:\Users\(You)\game\server or C:\Users\(You)\game_and_bot\server for the bot.
+2: Open CMD inside C:\Users\(You)\game\server
 
 3: Type npm install and click enter
 
@@ -29,8 +29,17 @@ node.js 18 or more
 * npm install command only happens one time, first time; next time you want to play just type npm start
 
 
+## **what's in:**
+1: game: the game
+2: readme.md: this
+3: game_example.gz: split run game, performed by me solo
+4: viewer.html: the viewer that translates the example game into visual
+
+
+
 ## **Bot:**
-Proof of concept split-run bot. Trained on 4-5 games. For now it plays solo and is in it's early stages, my resolution: perfect flawless split run with duo mode and a coach mode that points out mistakes then suggests better/optimal splits at any given situation. game_and_bot folder contains both. in the in-game chat type /bot v1, /bot v2, or /bot dev, for different versions of the bot. use /bot stop, to stop the bot. The bot starts from a specific situation that I gave it during training. That is because training it from zero caused it to get entangled and wasted so much time.
+Proof of concept split-run bot. Trained on 4-5 games. For now it plays solo and is in it's early stages, my resolution: perfect flawless split run with duo mode and a coach mode that points out mistakes then suggests better/optimal splits at any given situation. in the in-game chat type /bot v1, /bot v2, or /bot dev, for different versions of the bot. use /bot stop, to stop the bot. The bot starts from a specific situation that I gave it during training. That is because training it from zero caused it to get entangled and wasted so much time.
+The game_example.gz file, is a game played by human, me, solo, using unit 2 to simulate a team-mate. It uses the same sandbox parameters the bot was trained on, 35K~ mass, no walls, no decay. The viewer.html file opens a page in browser that shows the game visually, so you can see how I performed and how the bot was taught.
 
 
 https://github.com/user-attachments/assets/bc2b7967-7aac-4c80-a99d-1bec14f511af
