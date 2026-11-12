@@ -14,7 +14,7 @@ node.js 18 or more
 
 1: Download repo > unzip
 
-2: Open CMD inside C:\Users\(You)\game\server
+2: Open CMD inside C:\Users\ (You) \game\server
 
 3: Type npm install and click enter
 
