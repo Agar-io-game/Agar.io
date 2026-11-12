@@ -31,8 +31,11 @@ node.js 18 or more
 
 ## **what's in:**
 1: game: the game
+
 2: readme.md: this
+
 3: game_example.gz: split run game, performed by me solo
+
 4: viewer.html: the viewer that translates the example game into visual
 
 
