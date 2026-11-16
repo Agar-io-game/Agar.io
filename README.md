@@ -34,7 +34,7 @@ node.js 18 or more
 
 2: readme.md: this
 
-3: game_example.gz: this file is one of the games the bot was trained on, a game played by me, solo, using unit 2 to simulate a team-mate. played on the same sandbox rules the bot was trained on, 35K~ mass, no walls, no mass decay.
+3: game_example.jsonl.gz: this file is one of the games the bot was trained on, a game played by me, solo, using unit 2 to simulate a team-mate. played on the same sandbox rules the bot was trained on, 35K~ mass, no walls, no mass decay.
 
 4: viewer.html: this file translates the example game from text to visual. it opens a page in browser, click & drag the .gz file into the page to load it. you can see how I performed and what the bot learned from.
 
